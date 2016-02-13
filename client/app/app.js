@@ -3,45 +3,81 @@ angular.module('shortly', [
   'shortly.links',
   'shortly.shorten',
   'shortly.auth',
-  'ngRoute'
+  'ui.router'
 ])
-.config(function($routeProvider, $httpProvider) {
-  $routeProvider
-    .when('/', {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+  $stateProvider
+    .state('home', {
+      url: '/',
       templateUrl: 'app/auth/signin.html',
-      controller: 'AuthController',
-      authenticate: false
+      controller: 'AuthController'
     })
-    .when('/signin', {
+    .state('signin', {
+      url: '/signin',
       templateUrl: 'app/auth/signin.html',
-      controller: 'AuthController',
-      authenticate: false
+      controller: 'AuthController'
     })
-    .when('/signup', {
+    .state('signup', {
+      url: '/signup',
       templateUrl: 'app/auth/signup.html',
-      controller: 'AuthController',
-      authenticate: false
+      controller: 'AuthController' 
     })
-    .when('/links', {
+    .state('links', {
+      url: '/links',
       templateUrl: 'app/links/links.html',
       controller: 'LinksController',
       authenticate: true
     })
-    .when('/shorten', {
+    .state('shorten', {
+      url: '/shorten',
       templateUrl: 'app/shorten/shorten.html',
       controller: 'ShortenController',
       authenticate: true
     })
-    .when('/logout', {
+    .state('logout', {
+      url: '/logout',
       templateUrl: 'app/auth/signin.html',
       controller: 'AuthController',
       authenticate: false
-    })
-    .otherwise({
-      redirectTo: 'app/auth/signin.html',
-      controller: 'AuthController',
-      authenticate: false
     });
+
+    $urlRouterProvider.otherwise('/signin');
+  // $routeProvider
+  //   .when('/', {
+  //     templateUrl: 'app/auth/signin.html',
+  //     controller: 'AuthController',
+  //     authenticate: false
+  //   })
+  //   .when('/signin', {
+  //     templateUrl: 'app/auth/signin.html',
+  //     controller: 'AuthController',
+  //     authenticate: false
+  //   })
+  //   .when('/signup', {
+  //     templateUrl: 'app/auth/signup.html',
+  //     controller: 'AuthController',
+  //     authenticate: false
+  //   })
+  //   .when('/links', {
+  //     templateUrl: 'app/links/links.html',
+  //     controller: 'LinksController',
+  //     authenticate: true
+  //   })
+  //   .when('/shorten', {
+  //     templateUrl: 'app/shorten/shorten.html',
+  //     controller: 'ShortenController',
+  //     authenticate: true
+  //   })
+  //   .when('/logout', {
+  //     templateUrl: 'app/auth/signin.html',
+  //     controller: 'AuthController',
+  //     authenticate: false
+  //   })
+  //   .otherwise({
+  //     redirectTo: 'app/auth/signin.html',
+  //     controller: 'AuthController',
+  //     authenticate: false
+  //   });
     // Your code here
 
     // We add our $httpInterceptor into the array
@@ -65,7 +101,7 @@ angular.module('shortly', [
   };
   return attach;
 })
-.run(function ($rootScope, $location, Auth) {
+.run(function ($rootScope, $state, Auth) {
   // here inside the run phase of angular, our services and controllers
   // have just been registered and our app is ready
   // however, we want to make sure the user is authorized
@@ -73,9 +109,11 @@ angular.module('shortly', [
   // when it does change routes, we then look for the token in localstorage
   // and send that token to the server to see if it is a real user or hasn't expired
   // if it's not valid, we then redirect back to signin/signup
-  $rootScope.$on('$routeChangeStart', function (evt, next, current) {
-    if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
-      $location.path('/signin');
+  $rootScope.$on('$stateChangeStart', function (evt, toState, toParams, fromState, fromParams) {
+    if (toState.authenticate && !Auth.isAuth()) {
+      evt.preventDefault();
+      $state.transitionTo('signin');
+      
     }
   });
 });
