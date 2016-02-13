@@ -24,4 +24,4 @@ client/lib
 .floo
 .flooignore
 
-testing.js
+server/config/googleShortner.js

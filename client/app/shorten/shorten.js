@@ -10,6 +10,7 @@ angular.module('shortly.shorten', [])
       $scope.isLoading = true;
       Links.post(link)
       .then(function(resp) {
+        console.log($scope.link);
         $scope.isLoading = false;
         $scope.link = '';
       })
