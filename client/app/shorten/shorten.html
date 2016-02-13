@@ -1,6 +1,14 @@
+<div class='navigation' ng-controller="AuthController" ng-show="isAuth()">
+  <ul>
+    <li><a href='#/links' class='index'>All Links</a></li>
+    <li><a href='#/shorten' class='create'>Shorten</a></li>
+    <li><a href='' ng-click="signout()" class='logout'>Logout</a></li>
+  </ul>
+</div>
+
+
 <div id='container' class="creator" ng-controller="ShortenController">
 <!-- Your code here -->
-  
   <form name="urlForm" class="urlForm">
       <input class='url' type='url' ng-model='link.url' ng-required="true" name='input'>
       <input class='submit' type='submit' ng-disabled="urlForm.input.$error.url" value='Shorten' ng-click='addLink(link)'>
@@ -11,6 +19,7 @@
       </div>
       <img ng-if="isLoading" class='spinner' src='/assets/spiffygif_46x46.gif'>
   </form>
+</div>
   
 
 

@@ -1,13 +1,20 @@
+<div class='navigation' ng-controller="AuthController" ng-show="isAuth()">
+      <ul>
+        <li><a href='#/links' class='index'>All Links</a></li>
+        <li><a href='#/shorten' class='create'>Shorten</a></li>
+        <li><a href='' ng-click="signout()" class='logout'>Logout</a></li>
+      </ul>
+    </div>
+
 <div id='container' ng-controller="LinksController">
   <!-- Your html here -->
-  
   <input type=text class="filter" ng-model="search" placeholder="search"></input>
-  <div class='link' ng-repeat='datas in data.links | filter:search | orderBy:"link.visits" '>
+  <div class='link' ng-repeat='datas in data.links | filter:search | orderBy:"-visits" '>
 
     <img src='/assets/redirect_icon.png'/>
     <div class='visits'><span class='count'>{{datas.visits}}</span>Visits</div>
     <div class='title'>{{datas.title}}</div>
     <div class='original'>{{datas.url}}</div>
-    <a href="{{datas.base_url}}/{{datas.code}}">{{datas.base_url}}/{{datas.code}}</a>
+    <a href="{{datas.base_url + '/api/links'}}/{{datas.code}}">{{datas.base_url}}/{{datas.code}}</a>
   </div>
 </div>
