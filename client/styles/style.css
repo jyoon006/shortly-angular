@@ -146,3 +146,7 @@ input[type=url]:focus {
   clear: both;
 }
 
+.error {
+  font-size: 16px;
+  border: none;
+}

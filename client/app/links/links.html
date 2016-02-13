@@ -1,9 +1,10 @@
 <div id='container' ng-controller="LinksController">
   <!-- Your html here -->
   <div class='info' ng-repeat='datas in data.links'>
+    <img src='/assets/redirect_icon.png'/>
     <div class='visits'><span class='count'>{{datas.visits}}</span>Visits</div>
     <div class='title'>{{datas.title}}</div>
     <div class='original'>{{datas.url}}</div>
-    <a href="">/</a>
+    <a href="{{datas.base_url}}/{{datas.code}}">{{datas.base_url}}/{{datas.code}}</a>
   </div>
 </div>
