@@ -146,6 +146,14 @@ input[type=url]:focus {
   clear: both;
 }
 
+input {
+  display: inline;
+}
+
+input[type=submit] {
+  width: 10em;
+}
+
 .error {
   font-size: 16px;
   border: none;
