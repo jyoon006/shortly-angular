@@ -14,6 +14,9 @@ angular.module('shortly.shorten', [])
         console.log(resp);
         $scope.isLoading = false;
         $scope.link = '';
+      })
+      .catch(function(e) {
+        console.log(e);
       });
     }
     else {

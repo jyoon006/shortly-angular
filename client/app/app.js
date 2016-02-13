@@ -7,6 +7,10 @@ angular.module('shortly', [
 ])
 .config(function($routeProvider, $httpProvider) {
   $routeProvider
+    .when('/', {
+      templateUrl: 'app/auth/signin.html',
+      controller: 'AuthController'
+    })
     .when('/signin', {
       templateUrl: 'app/auth/signin.html',
       controller: 'AuthController'
@@ -28,8 +32,8 @@ angular.module('shortly', [
       controller: 'AuthController'
     })
     .otherwise({
-      redirectTo: 'app/links/links.html',
-      controller: 'LinksController'
+      redirectTo: 'app/auth/signin.html',
+      controller: 'AuthController'
     });
     // Your code here
 

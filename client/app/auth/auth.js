@@ -4,6 +4,7 @@
 angular.module('shortly.auth', [])
 
 .controller('AuthController', function ($scope, $window, $location, Auth) {
+  angular.extend($scope, Auth);
   $scope.user = {};
 
   $scope.signin = function () {
@@ -15,6 +16,7 @@ angular.module('shortly.auth', [])
       .catch(function (error) {
         console.error(error);
       });
+    Auth.isAuth();
   };
 
   $scope.signup = function () {
@@ -26,5 +28,9 @@ angular.module('shortly.auth', [])
       .catch(function (error) {
         console.error(error);
       });
+  };
+
+  $scope.signout = function () {
+    Auth.signout();
   };
 });
