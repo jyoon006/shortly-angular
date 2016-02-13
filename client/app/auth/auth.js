@@ -14,6 +14,7 @@ angular.module('shortly.auth', [])
         $location.path('/links');
       })
       .catch(function (error) {
+        $scope.errorLogin = true;
         console.error(error);
       });
     Auth.isAuth();
