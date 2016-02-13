@@ -7,9 +7,12 @@ angular.module('shortly.shorten', [])
   
   $scope.addLink = function(link) {
     if(Links.isValidUrl(link.url)) {
+      $scope.isLoading = true;
+      console.log($scope.isLoading);
       Links.post(link)
       .then(function(resp) {
         console.log(resp);
+        $scope.isLoading = false;
         $scope.link = '';
       });
     }

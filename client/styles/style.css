@@ -154,7 +154,12 @@ input[type=submit] {
   width: 10em;
 }
 
+.ng-invalid-url {
+  border-color: red;
+}
+
 .error {
+  margin: 10px;
   font-size: 16px;
   border: none;
 }

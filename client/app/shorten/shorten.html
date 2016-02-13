@@ -1,13 +1,15 @@
-<div id='container' ng-controller="ShortenController">
+<div id='container' class="creator" ng-controller="ShortenController">
 <!-- Your code here -->
   <form name="urlForm" class="urlForm">
       <input class='url' type='url' ng-model='link.url' name='input'>
       <input type='submit' value='Shorten' ng-click='addLink(link)'>
       <div role="alert">
+      
         <span style="color:red" class="error" ng-show="urlForm.input.$error.url">
-          Not valid url!</span>
+          Not a valid URL</span>
       </div>
+      <img ng-if="isLoading" class='spinner' src='/assets/spiffygif_46x46.gif'>
   </form>
-  <!-- <img class='spinner' src='/assets/spiffygif_46x46.gif'> -->
+  
 
 
